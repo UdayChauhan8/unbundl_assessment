@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>View Submitted Data</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <h2>View Submitted Data</h2>
+    <h2 style="margin-bottom: 20px;">View Submitted Data</h2>
 
-    <!-- Link to go back and add a new user -->
     <a href="index.php" class="btn btn-add">+ Add New User</a>
+    <br><br>
 
     <?php
     require 'db.php';
 
+    // fetch all users
     $result = $conn->query("SELECT * FROM users ORDER BY created_at DESC");
 
     if ($result->num_rows > 0) {
-        echo '<table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Created At</th>
-                    <th>Action</th>
-                </tr>';
+        echo '<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">';
+        echo '<tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>';
 
         while ($row = $result->fetch_assoc()) {
             echo '<tr>
@@ -53,5 +52,4 @@
     ?>
 
 </body>
-
 </html>

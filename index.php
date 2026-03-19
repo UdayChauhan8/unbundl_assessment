@@ -1,69 +1,68 @@
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>User Data Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
     <h2>User Data Form</h2>
 
-    <form action="submit.php" method="POST" onsubmit="return validateForm()">
+    <form action="submit.php" method="POST" onsubmit="return validateForm();">
 
-        <label>Name:</label>
+        <label for="name">Name:</label>
         <input type="text" name="name" id="name" placeholder="Enter your full name" required>
-        <span class="error" id="nameError"></span>
+        <span class="error" id="nameError" style="color:red; font-size: 12px;"></span>
 
-        <label>Email:</label>
+        <label for="email">Email:</label>
         <input type="email" name="email" id="email" placeholder="Enter your email" required>
-        <span class="error" id="emailError"></span>
+        <span class="error" id="emailError" style="color:red; font-size: 12px;"></span>
 
-        <label>Phone Number:</label>
+        <label for="phone">Phone Number:</label>
         <input type="number" name="phone" id="phone" placeholder="Enter 10-digit phone number" required>
-        <span class="error" id="phoneError"></span>
+        <span class="error" id="phoneError" style="color:red; font-size: 12px;"></span>
 
-        <label>Address:</label>
-        <textarea name="address" placeholder="Enter your address"></textarea>
+        <label for="address">Address:</label>
+        <textarea name="address" id="address" placeholder="Enter your address"></textarea>
 
-        <button type="submit">Submit</button>
+        <button type="submit" style="margin-top:15px;">Submit</button>
 
     </form>
 
     <script>
+        // basic form validation before sending to PHP
         function validateForm() {
-            let valid = true;
+            let isValid = true;
 
+            // clear old errors
             document.querySelectorAll('.error').forEach(e => e.textContent = '');
 
-            const name = document.getElementById('name').value.trim();
-            if (name.length < 2) {
+            let nameField = document.getElementById('name').value.trim();
+            if (nameField.length < 2) {
                 document.getElementById('nameError').textContent = 'Name must be at least 2 characters.';
-                valid = false;
-            } else if (!/^[a-zA-Z\s]+$/.test(name)) {
+                isValid = false;
+            } else if (!/^[a-zA-Z\s]+$/.test(nameField)) {
                 document.getElementById('nameError').textContent = 'Name can only contain letters and spaces.';
-                valid = false;
+                isValid = false;
             }
 
-            const email = document.getElementById('email').value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
+            let emailField = document.getElementById('email').value.trim();
+            // simple email regex
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailField)) {
                 document.getElementById('emailError').textContent = 'Please enter a valid email address.';
-                valid = false;
+                isValid = false;
             }
 
-            const phone = document.getElementById('phone').value.trim();
-            if (!/^\d{10}$/.test(phone)) {
+            let phoneField = document.getElementById('phone').value.trim();
+            // check for exactly 10 digits
+            if (!/^\d{10}$/.test(phoneField)) {
                 document.getElementById('phoneError').textContent = 'Phone number must be exactly 10 digits.';
-                valid = false;
+                isValid = false;
             }
 
-            return valid;
+            return isValid;
         }
     </script>
-
 </body>
-
 </html>

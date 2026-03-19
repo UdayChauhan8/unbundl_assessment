@@ -20,11 +20,12 @@ h2 {
     font-size: 1.8rem;
 }
 
+/* main form container */
 form {
     background: #fff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); /* slight drop shadow */
     max-width: 500px;
     margin: 0 auto;
 }
@@ -38,9 +39,10 @@ label {
 }
 
 label:first-of-type {
-    margin-top: 0;
+    margin-top: 0; 
 }
 
+/* common inputs */
 input[type="text"],
 input[type="email"],
 input[type="number"],
@@ -62,6 +64,7 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
 }
 
+/* hide arrows on number fields */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -74,7 +77,7 @@ input[type="number"] {
 
 textarea {
     height: 80px;
-    resize: vertical;
+    resize: vertical; /* only allow height resize */
     font-family: inherit;
 }
 
@@ -95,6 +98,7 @@ button:hover {
     background: #3451c7;
 }
 
+/* user list table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -177,6 +181,7 @@ tr:last-child td {
     font-size: 1.1rem;
 }
 
+/* error text */
 .error {
     display: block;
     color: #dc3545;
