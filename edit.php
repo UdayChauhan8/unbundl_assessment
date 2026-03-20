@@ -10,14 +10,19 @@ $id = $_GET['id'];
 $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
-$res = $stmt->get_result();
-$user = $res->fetch_assoc();
-
-if (!$user) {
+$stmt->bind_result($idOut, $nameOut, $emailOut, $phoneOut, $addressOut);
+if (!$stmt->fetch()) {
     die("User not found.");
 }
+$user = [
+    'id' => $idOut,
+    'name' => $nameOut,
+    'email' => $emailOut,
+    'phone' => $phoneOut,
+    'address' => $addressOut,
+];
+$stmt->close();
 
-// check for server-side error redirect
 $error = isset($_GET['error']) ? $_GET['error'] : '';
 ?>
 <!DOCTYPE html>
@@ -30,6 +35,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 
 <body>
     
+    <img src="logo.png" alt="Logo" class="logo">
     <h2>Edit User</h2>
 
     <form action="update.php" method="POST">

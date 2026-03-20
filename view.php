@@ -8,6 +8,7 @@
 
 <body>
     
+    <img src="logo.png" alt="Logo" class="logo">
     <h2>View Submitted Data </h2>
 
     <a href="index.php" class="btn btn-add">+ Add New User</a>
@@ -16,7 +17,6 @@
     <?php
     require 'db.php';
 
-    // fetch all users
     $result = $conn->query("SELECT * FROM users ORDER BY id ASC");
 
     if ($result->num_rows > 0) {

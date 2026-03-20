@@ -1,10 +1,8 @@
 <?php
-// Database connection
-
-$host = getenv('DB_HOST') ?: 'localhost';
-$user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASS') ?: 'D0vHybihaU';
-$dbName = getenv('DB_NAME') ?: 'unbundl_db';
+$host = 'sql108.infinityfree.com';
+$user = 'if0_41437522';
+$pass = 'D0vHybihaU';
+$dbName = 'if0_41437522_unbundl_db';
 
 $conn = new mysqli($host, $user, $pass, $dbName);
 

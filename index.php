@@ -8,10 +8,10 @@
 
 <body>
     
+    <img src="logo.png" alt="Logo" class="logo">
     <h2>User Data Form</h2>
 
     <?php
-    // show server-side error if redirected back
     $error = isset($_GET['error']) ? $_GET['error'] : '';
     ?>
 
