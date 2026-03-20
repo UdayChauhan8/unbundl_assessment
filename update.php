@@ -22,6 +22,10 @@ if (empty($phone) || !preg_match('/^\d{10}$/', $phone)) {
     die("Invalid phone number. Must be exactly 10 digits.");
 }
 
+if (empty($address)) {
+    die("Address is required.");
+}
+
 // execute update
 $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?");
 $stmt->bind_param("ssssi", $name, $email, $phone, $address, $id);

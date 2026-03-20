@@ -7,14 +7,8 @@
 </head>
 
 <body>
-    <header style="text-align: left; margin-bottom: 20px;">
-        <div
-            style="display: inline-flex; align-items: center; gap: 8px; background: white; padding: 6px 12px; border-radius: 6px;">
-            <img src="https://unbundl.com/cdn/shop/files/Logo_83b3f08f-7fa6-460e-b0f6-3a7bdd540472.webp?v=1756893840&width=40"
-                alt="Unbundl Symbol" style="height: 30px;">
-            <img src="https://unbundl.com/cdn/shop/files/unbundl_logo_blue.png" alt="Unbundl Text"
-                style="height: 22px;">
-        </div>
+    <header style="margin-bottom: 40px;">
+        <img src="logo.png" alt="Unbundl Logo" style="height: 60px; margin-left: -32px;">
     </header>
 
     <h2>User Data Form</h2>
@@ -30,11 +24,11 @@
         <span class="error" id="emailError"></span>
 
         <label for="phone">Phone Number:</label>
-        <input type="number" name="phone" id="phone" placeholder="Enter 10-digit phone number" required>
+        <input type="number" name="phone" id="phone" placeholder="Enter 10-digit phone number" maxlength="10" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" required>
         <span class="error" id="phoneError"></span>
 
         <label for="address">Address:</label>
-        <textarea name="address" id="address" placeholder="Enter your address"></textarea>
+        <textarea name="address" id="address" placeholder="Enter your address" required></textarea>
 
         <button type="submit">Submit</button>
 

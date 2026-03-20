@@ -5,7 +5,7 @@ require 'db.php';
 $name = trim($_POST['name']);
 $email = trim($_POST['email']);
 $phone = trim($_POST['phone']);
-$address = trim($_POST['address']); // optional
+$address = trim($_POST['address']);
 
 // quick validation checks
 if (empty($name) || strlen($name) < 2 || !preg_match('/^[a-zA-Z\s]+$/', $name)) {
@@ -19,6 +19,10 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 // Ensure phone is exactly 10 digits
 if (empty($phone) || !preg_match('/^\d{10}$/', $phone)) {
     die("Invalid phone number. Must be exactly 10 digits.");
+}
+
+if (empty($address)) {
+    die("Address is required.");
 }
 
 // insert into db
