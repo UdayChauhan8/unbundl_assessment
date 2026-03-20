@@ -7,10 +7,7 @@
 </head>
 
 <body>
-    <header style="margin-bottom: 40px;">
-        <img src="logo.png" alt="Unbundl Logo" style="height: 60px; margin-left: -32px;">
-    </header>
-
+    
     <h2>View Submitted Data </h2>
 
     <a href="index.php" class="btn btn-add">+ Add New User</a>

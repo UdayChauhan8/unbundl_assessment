@@ -29,10 +29,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 </head>
 
 <body>
-    <header style="margin-bottom: 40px;">
-        <img src="logo.png" alt="Unbundl Logo" style="height: 60px; margin-left: -32px;">
-    </header>
-
+    
     <h2>Edit User</h2>
 
     <form action="update.php" method="POST">
@@ -47,19 +44,22 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
 
         <label for="email">Email:</label>
         <input type="email" name="email" id="email"
+            pattern="^[A-Za-z0-9._%+\-]+@[A-Za-z][A-Za-z0-9.\-]*\.[A-Za-z]{2,}$"
+            title="Enter a valid email like name@domain.tld (domain must start with a letter)."
             value="<?= htmlspecialchars(isset($_GET['email']) ? $_GET['email'] : $user['email']) ?>" required>
         <span class="error"><?php if ($error === 'invalid_email') echo 'Please enter a valid email address.';
             elseif ($error === 'duplicate_email') echo 'This email is already registered. Please use a different one.'; ?></span>
 
         <label for="phone">Phone Number:</label>
         <input type="tel" name="phone" id="phone"
-            pattern="\d{10}" title="Must be exactly 10 digits." maxlength="10"
+            pattern="^[6-9]\d{9}$" title="Must be exactly 10 digits and start with 6/7/8/9." maxlength="10"
             value="<?= htmlspecialchars(isset($_GET['phone']) ? $_GET['phone'] : $user['phone']) ?>" required>
-        <span class="error"><?php if ($error === 'invalid_phone') echo 'Phone number must be exactly 10 digits.'; ?></span>
+        <span class="error"><?php if ($error === 'invalid_phone') echo 'Phone number must be exactly 10 digits and start with 6/7/8/9.'; ?></span>
 
         <label for="address">Address:</label>
-        <textarea name="address" id="address" required><?= htmlspecialchars(isset($_GET['address']) ? $_GET['address'] : $user['address']) ?></textarea>
-        <span class="error"><?php if ($error === 'empty_address') echo 'Address is required.'; ?></span>
+        <textarea name="address" id="address" maxlength="120" required><?= htmlspecialchars(isset($_GET['address']) ? $_GET['address'] : $user['address']) ?></textarea>
+        <span class="error"><?php if ($error === 'empty_address') echo 'Address is required.';
+            elseif ($error === 'address_too_long') echo 'Address is too long (max 20 words, max 50 chars/word, max 120 chars total).'; ?></span>
 
         <button type="submit">Update</button>
         <a href="view.php" class="btn btn-cancel">Cancel</a>
