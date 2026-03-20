@@ -19,11 +19,22 @@ if (!$user) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Edit User</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <header style="text-align: left; margin-bottom: 20px;">
+        <div
+            style="display: inline-flex; align-items: center; gap: 8px; background: white; padding: 6px 12px; border-radius: 6px;">
+            <img src="https://unbundl.com/cdn/shop/files/Logo_83b3f08f-7fa6-460e-b0f6-3a7bdd540472.webp?v=1756893840&width=40"
+                alt="Unbundl Symbol" style="height: 30px;">
+            <img src="https://unbundl.com/cdn/shop/files/unbundl_logo_blue.png" alt="Unbundl Text"
+                style="height: 22px;">
+        </div>
+    </header>
 
     <h2>Edit User</h2>
 
@@ -82,4 +93,5 @@ if (!$user) {
         }
     </script>
 </body>
+
 </html>

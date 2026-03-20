@@ -8,9 +8,9 @@ $email = trim($_POST['email']);
 $phone = trim($_POST['phone']);
 $address = trim($_POST['address']);
 
-// basic backend validation (same as submit.php)
+// basic backend validation
 if (empty($name) || strlen($name) < 2 || !preg_match('/^[a-zA-Z\s]+$/', $name)) {
-    die("Invalid name. Use only letters and spaces (min 2 characters)."); // TODO: redirect back with error instead of dying
+    die("Invalid name. Use only letters and spaces (min 2 characters)."); // redirect back with error instead of dying
 }
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
