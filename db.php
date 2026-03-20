@@ -1,16 +1,9 @@
 <?php
-// Database connection.
-// Uses environment variables when available so the project works with the provided `schema.sql`.
-//
-// Optional env vars:
-// - DB_HOST (default: localhost)
-// - DB_USER (default: root)
-// - DB_PASS (default: empty)
-// - DB_NAME (default: unbundl_db)
+// Database connection
 
 $host = getenv('DB_HOST') ?: 'localhost';
 $user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASS') ?: '';
+$pass = getenv('DB_PASS') ?: 'D0vHybihaU';
 $dbName = getenv('DB_NAME') ?: 'unbundl_db';
 
 $conn = new mysqli($host, $user, $pass, $dbName);

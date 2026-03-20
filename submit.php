@@ -1,8 +1,6 @@
 <?php
-// handle form submit
 require 'db.php';
 
-// Check database connection
 if (!$conn || $conn->connect_error) {
     header("Location: index.php");
     exit;
@@ -13,14 +11,9 @@ $email = trim($_POST['email']);
 $phone = trim($_POST['phone']);
 $address = trim($_POST['address']);
 
-// build redirect params
 $params = "&name=" . urlencode($name) . "&email=" . urlencode($email) . "&phone=" . urlencode($phone) . "&address=" . urlencode($address);
 
-// Stricter email validation:
-// - no spaces
-// - local part allowed characters
-// - domain must contain at least one dot and each label must start with a letter
-// - TLD must be letters-only (2-63 chars)
+// Validate email with a stricter pattern to reject malformed inputs.
 function isValidEmail(string $email): bool
 {
     if (strlen($email) > 254) {
@@ -41,16 +34,13 @@ function isValidEmail(string $email): bool
     if (strlen($local) > 64) {
         return false;
     }
-    // Disallow consecutive dots and leading/trailing dot in local part
     if ($local[0] === '.' || substr($local, -1) === '.' || strpos($local, '..') !== false) {
         return false;
     }
-    // Basic allowed chars for the local part
     if (!preg_match('/^[A-Za-z0-9._%+\-]+$/', $local)) {
         return false;
     }
 
-    // Domain must be dot-separated labels, no empty labels (no consecutive dots)
     $labels = explode('.', $domain);
     if (count($labels) < 2) {
         return false;
@@ -70,13 +60,11 @@ function isValidEmail(string $email): bool
         if ($label === $tld) {
             continue;
         }
-        // Domain labels must start with a letter (reject things like "12.com")
         if (!preg_match('/^[A-Za-z](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?$/', $label)) {
             return false;
         }
     }
 
-    // Disallow consecutive dots in domain
     if (strpos($domain, '..') !== false) {
         return false;
     }
@@ -84,7 +72,6 @@ function isValidEmail(string $email): bool
     return true;
 }
 
-// validation
 if (empty($name) || strlen($name) < 2 || !preg_match('/^[a-zA-Z\s]+$/', $name)) {
     header("Location: index.php?error=invalid_name" . $params);
     exit;
@@ -105,16 +92,12 @@ if (empty($address)) {
     exit;
 }
 
-// check address word limit (max 20 words)
 $word_count = str_word_count($address);
 if ($word_count > 20) {
     header("Location: index.php?error=address_too_long" . $params);
     exit;
 }
 
-// check address length:
-// - max 50 characters per word
-// - max 120 characters total (matches textarea maxlength)
 $address_max_word_len = 50;
 $address_max_len = 120;
 if (strlen($address) > $address_max_len) {
@@ -131,7 +114,6 @@ if (is_array($words)) {
     }
 }
 
-// check duplicate record
 $check = $conn->prepare("SELECT id FROM users WHERE name = ? AND phone = ?");
 $check->bind_param("ss", $name, $phone);
 $check->execute();
@@ -141,7 +123,6 @@ if ($check->get_result()->num_rows > 0) {
 }
 $check->close();
 
-// insert record
 $stmt = $conn->prepare("INSERT INTO users (name, email, phone, address) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $name, $email, $phone, $address);
 
