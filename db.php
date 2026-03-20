@@ -1,8 +1,8 @@
 <?php
 //connecting to the database
-$conn = new mysqli("127.0.0.1", "root", "root", "unbundl_db");
+$conn = new mysqli("sql108.byetcluster.com", "if0_41437522", "D0vHybihaU", "if0_41437522_unbundl_db");
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error); // bad connection
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
