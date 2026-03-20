@@ -39,12 +39,6 @@ input, textarea {
     font-family: 'Nunito Sans', sans-serif;
 }
 
-/* hide arrows on number fields */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
 
 textarea {
     height: 80px;
@@ -96,4 +90,10 @@ th {
     color: #FF4A4A;
     font-size: 12px;
     margin-top: 4px;
+}
+
+.no-data {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
 }
