@@ -1,5 +1,5 @@
 <?php
-// TODO: maybe move credentials to a .env file later?
+//connecting to the database
 $conn = new mysqli("127.0.0.1", "root", "root", "unbundl_db");
 
 if ($conn->connect_error) {

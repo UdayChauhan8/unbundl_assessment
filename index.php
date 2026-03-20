@@ -12,20 +12,20 @@
 
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" placeholder="Enter your full name" required>
-        <span class="error" id="nameError" style="color:red; font-size: 12px;"></span>
+        <span class="error" id="nameError"></span>
 
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" placeholder="Enter your email" required>
-        <span class="error" id="emailError" style="color:red; font-size: 12px;"></span>
+        <span class="error" id="emailError"></span>
 
         <label for="phone">Phone Number:</label>
         <input type="number" name="phone" id="phone" placeholder="Enter 10-digit phone number" required>
-        <span class="error" id="phoneError" style="color:red; font-size: 12px;"></span>
+        <span class="error" id="phoneError"></span>
 
         <label for="address">Address:</label>
         <textarea name="address" id="address" placeholder="Enter your address"></textarea>
 
-        <button type="submit" style="margin-top:15px;">Submit</button>
+        <button type="submit">Submit</button>
 
     </form>
 

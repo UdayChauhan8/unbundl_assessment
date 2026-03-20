@@ -32,21 +32,21 @@ if (!$user) {
 
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="<?= htmlspecialchars($user['name']) ?>" required>
-        <span class="error" id="nameError" style="color:red; font-size: 12px;"></span>
+        <span class="error" id="nameError"></span>
 
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>" required>
-        <span class="error" id="emailError" style="color:red; font-size: 12px;"></span>
+        <span class="error" id="emailError"></span>
 
         <label for="phone">Phone Number:</label>
         <input type="number" name="phone" id="phone" value="<?= htmlspecialchars($user['phone']) ?>" required>
-        <span class="error" id="phoneError" style="color:red; font-size: 12px;"></span>
+        <span class="error" id="phoneError"></span>
 
         <label for="address">Address:</label>
         <textarea name="address" id="address"><?= htmlspecialchars($user['address']) ?></textarea>
 
-        <button type="submit" style="margin-top:15px;">Update</button>
-        <a href="view.php" class="btn btn-cancel" style="margin-left: 10px;">Cancel</a>
+        <button type="submit">Update</button>
+        <a href="view.php" class="btn btn-cancel">Cancel</a>
     </form>
 
     <script>

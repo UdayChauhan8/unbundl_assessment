@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <h2 style="margin-bottom: 20px;">View Submitted Data</h2>
+    <h2>View Submitted Data</h2>
 
     <a href="index.php" class="btn btn-add">+ Add New User</a>
     <br><br>
@@ -15,17 +15,16 @@
     require 'db.php';
 
     // fetch all users
-    $result = $conn->query("SELECT * FROM users ORDER BY created_at DESC");
+    $result = $conn->query("SELECT * FROM users ORDER BY id DESC");
 
     if ($result->num_rows > 0) {
-        echo '<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">';
+        echo '<table>';
         echo '<tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Address</th>
-                <th>Created At</th>
                 <th>Action</th>
               </tr>';
 
@@ -36,7 +35,6 @@
                     <td>' . htmlspecialchars($row['email']) . '</td>
                     <td>' . htmlspecialchars($row['phone']) . '</td>
                     <td>' . htmlspecialchars($row['address']) . '</td>
-                    <td>' . $row['created_at'] . '</td>
                     <td class="actions">
                         <a href="edit.php?id=' . $row['id'] . '" class="btn btn-edit">Edit</a>
                     </td>
