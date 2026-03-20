@@ -16,6 +16,9 @@ $user = $res->fetch_assoc();
 if (!$user) {
     die("User not found.");
 }
+
+// check for server-side error redirect
+$error = isset($_GET['error']) ? $_GET['error'] : '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,60 +35,36 @@ if (!$user) {
 
     <h2>Edit User</h2>
 
-    <form action="update.php" method="POST" onsubmit="return validateEditForm()">
+    <form action="update.php" method="POST">
         <input type="hidden" name="id" value="<?= $user['id'] ?>">
 
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<?= htmlspecialchars($user['name']) ?>" required>
-        <span class="error" id="nameError"></span>
+        <input type="text" name="name" id="name"
+            pattern="[a-zA-Z\s]+" title="Only letters and spaces allowed." minlength="2"
+            value="<?= htmlspecialchars(isset($_GET['name']) ? $_GET['name'] : $user['name']) ?>" required>
+        <span class="error"><?php if ($error === 'invalid_name') echo 'Name must be at least 2 characters (letters and spaces only).';
+            elseif ($error === 'duplicate_record') echo 'A user with this name and phone number already exists.'; ?></span>
 
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<?= htmlspecialchars($user['email']) ?>" required>
-        <span class="error" id="emailError"></span>
+        <input type="email" name="email" id="email"
+            value="<?= htmlspecialchars(isset($_GET['email']) ? $_GET['email'] : $user['email']) ?>" required>
+        <span class="error"><?php if ($error === 'invalid_email') echo 'Please enter a valid email address.';
+            elseif ($error === 'duplicate_email') echo 'This email is already registered. Please use a different one.'; ?></span>
 
         <label for="phone">Phone Number:</label>
-        <input type="number" name="phone" id="phone" value="<?= htmlspecialchars($user['phone']) ?>" maxlength="10" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" required>
-        <span class="error" id="phoneError"></span>
+        <input type="tel" name="phone" id="phone"
+            pattern="\d{10}" title="Must be exactly 10 digits." maxlength="10"
+            value="<?= htmlspecialchars(isset($_GET['phone']) ? $_GET['phone'] : $user['phone']) ?>" required>
+        <span class="error"><?php if ($error === 'invalid_phone') echo 'Phone number must be exactly 10 digits.'; ?></span>
 
         <label for="address">Address:</label>
-        <textarea name="address" id="address" required><?= htmlspecialchars($user['address']) ?></textarea>
+        <textarea name="address" id="address" required><?= htmlspecialchars(isset($_GET['address']) ? $_GET['address'] : $user['address']) ?></textarea>
+        <span class="error"><?php if ($error === 'empty_address') echo 'Address is required.'; ?></span>
 
         <button type="submit">Update</button>
         <a href="view.php" class="btn btn-cancel">Cancel</a>
     </form>
 
-    <script>
-        // duplicate validation logic from index.php (should probably extract this to a separate js file later)
-        function validateEditForm() {
-            let isValid = true;
-
-            document.querySelectorAll('.error').forEach(e => e.textContent = '');
-
-            let nameField = document.getElementById('name').value.trim();
-            if (nameField.length < 2) {
-                document.getElementById('nameError').textContent = 'Name must be at least 2 characters.';
-                isValid = false;
-            } else if (!/^[a-zA-Z\s]+$/.test(nameField)) {
-                document.getElementById('nameError').textContent = 'Name can only contain letters and spaces.';
-                isValid = false;
-            }
-
-            let emailField = document.getElementById('email').value.trim();
-            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailField)) {
-                document.getElementById('emailError').textContent = 'Invalid email address.';
-                isValid = false;
-            }
-
-            let phoneField = document.getElementById('phone').value.trim();
-            if (!/^\d{10}$/.test(phoneField)) {
-                document.getElementById('phoneError').textContent = 'Phone must be exactly 10 digits.';
-                isValid = false;
-            }
-
-            return isValid;
-        }
-    </script>
 </body>
 
 </html>
